@@ -35,6 +35,20 @@ public  class Planet{
     double F=(G*mass*p.mass)/(r*r);
     return F;
    }
+   public double calcForceExertedByX(Planet p){
+        double r=calcDistance(p);
+        double dx=p.xxPos-xxPos;
+        double F=calcForceExertedBy(p);
+        
+        return F*dx/r;
+   }
+   public double calcForceExertedByY(Planet p){
+        double r=calcDistance(p);
+        double dy=p.yyPos-yyPos;
+        double F=calcForceExertedBy(p);
+        
+        return F*dy/r;
+   }
    public double calcNetForceExertedByX(Planet allp[]){
         double Fx=0;
 
@@ -42,10 +56,8 @@ public  class Planet{
             if(this.equals(p)){
                 continue;
             }
-            double r=calcDistance(p);
-            double dx=p.xxPos-xxPos;
-            double F=calcForceExertedBy(p);
-            Fx+= F*dx/r;
+            
+            Fx+= calcForceExertedByX(p);
         }
         return Fx;
     }
@@ -57,10 +69,7 @@ public  class Planet{
             if(this.equals(p)){
                 continue;
             }
-            double r=calcDistance(p);
-            double dy=p.yyPos-yyPos;
-            double F=calcForceExertedBy(p);
-            Fy+= F*dy/r;
+            Fy+=calcForceExertedByY(p);
         }
         return Fy;
     }
