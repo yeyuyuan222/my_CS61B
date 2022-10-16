@@ -51,12 +51,12 @@ public class NBody {
         //StdAudio.play("audio/2001.mid");
         }
 
-        StdOut.printf("%d\n", planets.length);
+        StdOut.printf("%d\n", allp.length);
         StdOut.printf("%.2e\n", radius);
-        for (int i = 0; i < planets.length; i++) {
+        for (int i = 0; i < allp.length; i++) {
             StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-            planets[i].xxPos, planets[i].yyPos, planets[i].xxVel,
-            planets[i].yyVel, planets[i].mass, planets[i].imgFileName);   
+            allp[i].xxPos, allp[i].yyPos, allp[i].xxVel,
+            allp[i].yyVel, allp[i].mass, allp[i].imgFileName);   
          }
     }
 
