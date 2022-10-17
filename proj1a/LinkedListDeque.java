@@ -1,5 +1,5 @@
 public class LinkedListDeque<T>{
-    public class Node{
+    private class Node{
         public T data;
         public Node next;
         public  Node prev;
@@ -9,8 +9,8 @@ public class LinkedListDeque<T>{
             prev=pre;
         }
     }
-    Node sentinel;
-    int size;
+    private Node sentinel;
+    private int size;
     public LinkedListDeque(){
         size=0;
         sentinel =new Node(null,null,null);
@@ -18,12 +18,13 @@ public class LinkedListDeque<T>{
         sentinel.next= sentinel;
         //sentinel node
     }
-    public LinkedListDeque(T item){
+
+    /*public LinkedListDeque(T item){
         size=1;
         sentinel = new Node(null,null,null);
         sentinel.next = new Node(item, sentinel, sentinel);
         sentinel.prev= sentinel.next;
-    }
+    }*/
     /*Invariant: new item is added after sentinel:first*/
     public void addFirst(T item){
         size++;
@@ -56,6 +57,7 @@ public class LinkedListDeque<T>{
             size--;
             Node temp= sentinel.next;
             sentinel.next=temp.next;
+            temp.next.prev=sentinel;
             T val=temp.data;
             temp=null;
             return val;
@@ -67,6 +69,7 @@ public class LinkedListDeque<T>{
             size--;
             Node temp= sentinel.prev;
             sentinel.prev=temp.prev;
+            temp.prev.next=sentinel;
             T val=temp.data;
             temp=null;
             return val;
@@ -84,12 +87,12 @@ public class LinkedListDeque<T>{
         }
         return cur.data;
     }
-    public T getRecursiveHelper(int index, Node cur){
+    private T getRecursiveHelper(int index, Node cur){
         if(index==0){
             return cur.data;
         }
         else{
-            return getRecursiveHelper(index--,cur.next);
+            return getRecursiveHelper(index-1,cur.next);
         }
     }
     public T getRecursive(int index){
@@ -100,4 +103,5 @@ public class LinkedListDeque<T>{
             return getRecursiveHelper(index,sentinel.next);
         }
     }
+    
 }

@@ -73,4 +73,7 @@ public class ArrayDeque<T>{
         }
         return items[index];
     }
+    public boolean isEmpty(){
+        return size==0;
+    }
 }
