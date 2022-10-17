@@ -102,7 +102,7 @@ public class ArrayDeque<T>{
             cur=(cur+1)%items.length;
         }
     }
-    public static void main(String args[]){
+    /* public static void main(String args[]){
         
         ArrayDeque L=new ArrayDeque();
         L.addLast(1);
@@ -118,6 +118,6 @@ public class ArrayDeque<T>{
         L.addLast(9);
         L.removeFirst();
         L.removeLast();
-    }
+    } */
 
 }
