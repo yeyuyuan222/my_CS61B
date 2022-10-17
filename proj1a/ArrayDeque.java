@@ -60,8 +60,8 @@ public class ArrayDeque<T>{
             return null;
         }
         size--;
-        if(size/items.length<0.25){//usage<0.25
-            resize(2*size);
+        if(items.length>8 && size/items.length<0.25){//usage<0.25
+            resize(2*items.length);
         }
         front=incFront();
         return items[front];
@@ -71,8 +71,8 @@ public class ArrayDeque<T>{
             return null;
         }
         size--;
-        if(size/items.length<0.25){//usage<0.25
-            resize(2*size);
+        if(items.length>8 && size/items.length<0.25){//usage<0.25
+            resize(2*items.length);
         }
         T val=items[rear];
         rear=decRear();
@@ -101,6 +101,23 @@ public class ArrayDeque<T>{
             System.out.print(' ');
             cur=(cur+1)%items.length;
         }
+    }
+    public static void main(String args[]){
+        
+        ArrayDeque L=new ArrayDeque();
+        L.addLast(1);
+         L.addLast(2);
+        System.out.print(L.size());
+        L.addLast(3);
+        L.addLast(4);
+        L.addLast(5);
+        L.addLast(6);
+        System.out.print(L.size());
+        L.addLast(7); 
+        L.addLast(8);
+        L.addLast(9);
+        L.removeFirst();
+        L.removeLast();
     }
 
 }
