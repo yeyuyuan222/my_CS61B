@@ -97,7 +97,7 @@ public class ArrayDeque<T>{
         }
         while(cur!=rear){
 
-            System.out.print(items[cur].data);
+            System.out.print(items[cur]);
             System.out.print(' ');
             cur=(cur+1)%items.length;
         }
