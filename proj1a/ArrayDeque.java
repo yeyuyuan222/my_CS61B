@@ -1,3 +1,5 @@
+import java.util.zip.CheckedInputStream;
+
 public class ArrayDeque<T>{
     private T []items;
     private int size;
@@ -19,8 +21,8 @@ public class ArrayDeque<T>{
             rear=size-1;
         }else{
             System.arraycopy(items,0,temp,0,rear+1);
-            System.arraycopy(items,front+1,temp,capacity-items.length+front+1,size-rear-1);
-            front=capacity-items.length+front;
+            System.arraycopy(items,front+1,temp,capacity-size+rear+1,size-rear-1);
+            front=capacity-size+rear;
         }
         items = temp;
     }
@@ -55,27 +57,30 @@ public class ArrayDeque<T>{
         items[rear]=item;
         size++;
     }
+    private void checkUsage(){
+        double usage=((double)size)/(double)items.length;
+         if(items.length>8 && usage<0.25){//usage<0.25
+            resize(2*size);
+        }
+    }
     public T removeFirst(){
         if(size==0){
             return null;
         }
         size--;
-        if(items.length>8 && size/items.length<0.25){//usage<0.25
-            resize(2*items.length);
-        }
         front=incFront();
-        return items[front];
+        T val=items[front];
+        checkUsage();
+        return val;
     }
     public T removeLast(){
         if(size==0){
             return null;
         }
         size--;
-        if(items.length>8 && size/items.length<0.25){//usage<0.25
-            resize(2*items.length);
-        }
         T val=items[rear];
         rear=decRear();
+      checkUsage(); 
         return val;
     }
     public int size(){
@@ -85,7 +90,7 @@ public class ArrayDeque<T>{
         if(index>=size){
             return null;
         }
-        return items[index+front+1];
+        return items[(index+front+1)%items.length];
     }
     public boolean isEmpty(){
         return size==0;
@@ -102,22 +107,29 @@ public class ArrayDeque<T>{
             cur=(cur+1)%items.length;
         }
     }
-    /* public static void main(String args[]){
+/*     public static void main(String args[]){
         
         ArrayDeque L=new ArrayDeque();
-        L.addLast(1);
-         L.addLast(2);
+
+        L.addFirst(6);
+        L.addFirst(5);
+        L.addFirst(4);
+        L.addFirst(3);
+        L.addFirst(2);
+         L.addFirst(1);
         System.out.print(L.size());
-        L.addLast(3);
-        L.addLast(4);
-        L.addLast(5);
-        L.addLast(6);
         System.out.print(L.size());
         L.addLast(7); 
         L.addLast(8);
-        L.addLast(9);
         L.removeFirst();
-        L.removeLast();
-    } */
+       L.removeFirst();
+L.removeFirst();
+L.removeFirst();
+L.removeFirst();
+L.removeFirst();
+L.removeFirst();
+
+
+    }  */
 
 }
