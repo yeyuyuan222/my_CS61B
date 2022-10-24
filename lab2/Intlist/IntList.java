@@ -91,7 +91,8 @@ public class IntList {
             return A;
         }
         else{
-            return dcatenate(A.rest,B);
+            A.rest=dcatenate(A.rest,B);
+            return A;
         }
 
     }
