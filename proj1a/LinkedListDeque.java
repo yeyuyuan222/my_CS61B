@@ -16,15 +16,8 @@ public class LinkedListDeque<T>{
         sentinel =new Node(null,null,null);
         sentinel.prev= sentinel;
         sentinel.next= sentinel;
-        //sentinel node
     }
 
-    /*public LinkedListDeque(T item){
-        size=1;
-        sentinel = new Node(null,null,null);
-        sentinel.next = new Node(item, sentinel, sentinel);
-        sentinel.prev= sentinel.next;
-    }*/
     /*Invariant: new item is added after sentinel:first*/
     public void addFirst(T item){
         size++;
@@ -52,6 +45,7 @@ public class LinkedListDeque<T>{
             cur=cur.next;
         }
     }
+    /*please remember to rebuild the links of next and *prev* after removal. */
     public T removeFirst(){
         if(size>0){
             size--;

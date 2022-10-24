@@ -22,10 +22,13 @@ public class ArrayDeque<T>{
         }else{
             System.arraycopy(items,0,temp,0,rear+1);
             System.arraycopy(items,front+1,temp,capacity-size+rear+1,size-rear-1);
+            //make sure the index arguments above are correct.
             front=capacity-size+rear;
         }
         items = temp;
     }
+    /*the inc/dec functions don't change the values of front and rear, it returns a new value. 
+    In case we just want to know the values after inc/dec, but not changing it for real. */
     private int incFront(){
         return (front+1)%items.length;
     }
@@ -41,6 +44,7 @@ public class ArrayDeque<T>{
     private boolean isFull(){
         return incRear()==front;
     }
+    /*pay attention to which comes first, inc/decreasing front/rear or assigning item */
     public void addFirst(T item) {
         if(isFull()){
             resize(2*size);
@@ -63,6 +67,7 @@ public class ArrayDeque<T>{
             resize(2*size);
         }
     }
+    /*should not remove when size==0 */
     public T removeFirst(){
         if(size==0){
             return null;
@@ -86,11 +91,14 @@ public class ArrayDeque<T>{
     public int size(){
         return size;
     }
+    /*the argument 'index' refers to the  the order of the element in the abstrat list, 
+     * not necessarily equals to the real index of array     */
     public T get(int index){
         if(index>=size){
             return null;
         }
         return items[(index+front+1)%items.length];
+        //please remember to mod length, please. Otherwise it might cause 'out of bounds' error
     }
     public boolean isEmpty(){
         return size==0;
